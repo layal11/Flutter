@@ -1,16 +1,23 @@
-# first_flutter_test
+# To preview proposed changes, use the --dry-run flag
+    dart fix --dry-run
+# To apply the proposed changes, use the --apply flag
+    dart fix --apply
 
-A new Flutter project.
+# Container
+Container (
+    docoration: .....
+    child: Center (...),
+           Column (...),
+           Row (...),
+)
 
-## Getting Started
+# constructor function 
+- same as class name
+- has no return type
+- const WidgetName(this.x, this.y, {super.key});
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# StatefulWidget 
+- has 2 classes and a state.
+- The second class starts with _ which means it is private and can only be used internally in the file.
+- In this private class we declare our variables and define functions.
+- NOTE: setting state will cause this build to execute, thus causing the image to change
