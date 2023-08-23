@@ -1,16 +1,82 @@
-# first_flutter_test
+# To preview proposed changes, use the --dry-run flag
+    dart fix --dry-run
+# To apply the proposed changes, use the --apply flag
+    dart fix --apply
 
-A new Flutter project.
+# Container
+Container (
+    docoration: .....
+    child: Center (...),
+           Column (...),
+           Row (...),
+)
 
-## Getting Started
+# constructor function 
+- same as class name
+- has no return type
+- const WidgetName(this.x, this.y, {super.key});
 
-This project is a starting point for a Flutter application.
+# StatefulWidget 
+- has 2 classes and a state.
+- The second class starts with _ which means it is private and can only be used internally in the file.
+- In this private class we declare our variables and define functions.
+- NOTE: setting state will cause this build to execute, thus causing the image to change
 
-A few resources to get you started if this is your first Flutter project:
+# StatefulWidget Lifecycle
+- Three extremely important stateful widget lifecycle
+1- initState(): Executed by Flutter when the StatefulWidget's State object is initialized
+2- build(): Executed by Flutter when the Widget is built for the first time AND after setState() was called
+3- dispose(): Executed by Flutter right before the Widget will be deleted (e.g., because it was displayed conditionally)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# NOTE:
+- We can store components/widgets into variables.
+Widget x = const WidgetName();
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# heirarchy
+- body
+    - container
+        - child
+            - column / row
+                - mainAxisSize
+                - mainAxisAlignment (vertical alignment)
+                - crossAxisAlignment (horizontal alignment)
+                - children: []
+
+# Define a MODEL
+- class ModelName {
+    const ModelName (this.text, this.answers);
+  
+    final String text;
+    final List<String> answers;
+}
+
+# ...spreadOperator
+- Ex: currentQuestion.answers.map( () {} )
+- it is used to convert a list in an object to elements 
+- const numbers = [[1, 2, 3], 4];
+  const moreNums = [...numbers, 5];
+  The result will be:
+  [1, 2, 3, 4, 5]
+
+# .map() method for lists
+- used to map the items in the list and it doesn't change the order of items in the original list object stored in memory.
+
+# .shuffle() method for lists
+- used to change the order of the items in the list. However, it changes the order of items in the original list object stored in memory and that's why we need to copy the original one before shuffling using List.of()
+
+# Data Types
+- List<Map<String, Object>> getSummaryData() {
+    final List<Map<String, Object>> summary = []; //course 81
+    for (var i = 0; i <= chosenAnswers.length; i++) {
+      summary.add({
+        'question_index': i,
+        'question': questions[i].text,
+        'correct_answer': questions[i].answers[0],
+        'user_answer': chosenAnswers[i],
+      });
+    }
+    return summary;
+}
+
+# Expanded widget
+- Creates a widget that expands a child of a [Row], [Column], or [Flex] so that the child fills the available space along the flex widget's main axis.
