@@ -1,5 +1,5 @@
 import 'package:first_flutter_app/data/questions.dart';
-import 'package:first_flutter_app/questions_summary.dart';
+import 'package:first_flutter_app/questions_summary/questions_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,8 +20,8 @@ class ResultsScreen extends StatelessWidget {
           'user_answer': chosenAnswers[i],
         });
       }
-    } catch (ex) {
-      print(ex);
+    } on Exception catch(_){
+      rethrow;
     }
     return summary;
   }
