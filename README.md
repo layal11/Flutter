@@ -80,3 +80,18 @@ Widget x = const WidgetName();
 
 # Expanded widget
 - Creates a widget that expands a child of a [Row], [Column], or [Flex] so that the child fills the available space along the flex widget's main axis.
+
+# get  Method
+- we can write:
+    List<Map<String, Object>> get getSummaryData {
+        // function logic goes here
+    }
+    - calling it without () :
+        final summaryData = getSummaryData;
+
+- instead of: 
+    List<Map<String, Object>> getSummaryData(){
+        // function logic goes here
+    }
+     - calling it:
+        final summaryData = getSummaryData();

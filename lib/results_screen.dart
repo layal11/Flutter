@@ -31,9 +31,9 @@ class ResultsScreen extends StatelessWidget {
     final summaryData = getSummaryData();
     final numTotalQuestions = questions.length;
     final numCorrectQuestions = summaryData
-        .where((data) {
-          return data['user_answer'] == data['correct_answer'];
-        })
+        .where(
+          (data) => data['user_answer'] == data['correct_answer'],
+        )
         .length
         .toString();
 
