@@ -46,6 +46,7 @@ class ResultsScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: GoogleFonts.robotoMono(
                 fontSize: 20,
+                color: Colors.white,
               )),
           const SizedBox(
             height: 30,
@@ -54,9 +55,14 @@ class ResultsScreen extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          TextButton(
+          TextButton.icon(
             onPressed: restartQuizBtn,
-            child: const Text('Restart quiz'),
+            label: const Text('Restart Quiz'),
+            icon: const Icon(Icons.restart_alt),
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.red[400],
+            ),
           ),
         ],
       ),

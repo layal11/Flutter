@@ -18,7 +18,7 @@ class QuestionsSummary extends StatelessWidget {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 30,
                     child: CircleAvatar(
                       backgroundColor:
@@ -39,12 +39,23 @@ class QuestionsSummary extends StatelessWidget {
                         const SizedBox(height: 5),
                         Text(
                           data['question'].toString(),
-                          style: const TextStyle(fontSize: 15),
+                          style: const TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 244, 224, 11),
+                          ),
                         ),
                         const SizedBox(height: 5),
-                        Text(data['correct_answer'].toString()),
+                        Text(
+                          data['correct_answer'].toString(),
+                          style: const TextStyle(color: Colors.green),
+                        ),
                         const SizedBox(height: 5),
-                        Text(data['user_answer'].toString()),
+                        Text(data['user_answer'].toString(),
+                            style: TextStyle(
+                                color: data['user_answer'] ==
+                                        data['correct_answer']
+                                    ? Colors.green
+                                    : Colors.red)),
                         const SizedBox(height: 30),
                       ],
                     ),
