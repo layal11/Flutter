@@ -20,7 +20,7 @@ class ResultsScreen extends StatelessWidget {
           'user_answer': chosenAnswers[i],
         });
       }
-    } on Exception catch(_){
+    } on Exception catch (_) {
       rethrow;
     }
     return summary;
@@ -43,13 +43,14 @@ class ResultsScreen extends StatelessWidget {
         children: [
           Text(
               'You\'ve answered $numCorrectQuestions out of $numTotalQuestions questions correctly',
+              textAlign: TextAlign.center,
               style: GoogleFonts.robotoMono(
                 fontSize: 20,
               )),
           const SizedBox(
             height: 30,
           ),
-          QuestionsSummary(summaryData: summaryData),
+          QuestionsSummary(sumryData: summaryData),
           const SizedBox(
             height: 30,
           ),
