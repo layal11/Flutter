@@ -95,3 +95,7 @@ Widget x = const WidgetName();
     }
      - calling it:
         final summaryData = getSummaryData();
+
+# Debug mode
+Step over F10 => step into the next line 
+Continue F5 => goes to the next breakpoint 
