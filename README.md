@@ -3,6 +3,9 @@
 # To apply the proposed changes, use the --apply flag
     dart fix --apply
 
+# Scaffold
+- sets the bg color of the app to white
+
 # Container
 Container (
     docoration: .....
