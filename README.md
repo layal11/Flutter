@@ -125,3 +125,6 @@ Continue F5 => goes to the next breakpoint
 - add backslash before special characters to escape them (dollar sign)
     Text('\$${expenseItem.amount.toStringAsFixed(2)}'),
 
+# packages
+    - uuid for unique id generation 
+    - intl for date/number formatting
