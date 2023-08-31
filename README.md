@@ -120,3 +120,8 @@ Continue F5 => goes to the next breakpoint
 
 # Column() vs ListView()
  - ListView() is same as Column but it is used for larger data and it has auto scroll.
+
+ # injection syntax using ${} 
+- add backslash before special characters to escape them (dollar sign)
+    Text('\$${expenseItem.amount.toStringAsFixed(2)}'),
+
