@@ -68,21 +68,36 @@ Widget x = const WidgetName();
 - used to change the order of the items in the list. However, it changes the order of items in the original list object stored in memory and that's why we need to copy the original one before shuffling using List.of()
 
 # Data Types
-- List<Map<String, Object>> getSummaryData() {
-    final List<Map<String, Object>> summary = []; //course 81
-    for (var i = 0; i <= chosenAnswers.length; i++) {
-      summary.add({
-        'question_index': i,
-        'question': questions[i].text,
-        'correct_answer': questions[i].answers[0],
-        'user_answer': chosenAnswers[i],
-      });
+1. List<>
+    - List<Map<String, Object>> getSummaryData() {
+        final List<Map<String, Object>> summary = []; //course 81
+        for (var i = 0; i <= chosenAnswers.length; i++) {
+        summary.add({
+            'question_index': i,
+            'question': questions[i].text,
+            'correct_answer': questions[i].answers[0],
+            'user_answer': chosenAnswers[i],
+        });
+        }
+        return summary;
     }
-    return summary;
-}
+2. enum
+    - enum Categories
+        {
+            leisure,
+            travel,
+            food,
+            work,
+        } 
+    - class Expenses
+        {
+            Expenses.named({required this.category});
+            final Categories category;
+        }
 
 # Expanded widget
 - Creates a widget that expands a child of a [Row], [Column], or [Flex] so that the child fills the available space along the flex widget's main axis.
+In other words, child inside Row/Column/Flex won't take space more than their parent widget.
 
 # get  Method
 - we can write:
@@ -102,3 +117,6 @@ Widget x = const WidgetName();
 # Debug mode
 Step over F10 => step into the next line 
 Continue F5 => goes to the next breakpoint 
+
+# Column() vs ListView()
+ - ListView() is same as Column but it is used for larger data and it has auto scroll.
