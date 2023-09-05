@@ -128,3 +128,7 @@ Continue F5 => goes to the next breakpoint
 # packages
     - uuid for unique id generation 
     - intl for date/number formatting
+
+# Dispose method
+- used in StatefulWidget ONLY
+- dispose, like initState and build, is part of a StatefulWidget's life cycle. it is called automatically by flutter when the widget and its state are about to be destroyed (removed from the UI)
