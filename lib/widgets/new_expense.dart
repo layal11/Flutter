@@ -8,19 +8,8 @@ class NewExpense extends StatefulWidget {
 }
 
 class _NewExpenseState extends State<NewExpense> {
-  String enteredTitle = '';
-  int enteredAmount = 0;
-
   final titleController = TextEditingController();
   final amountController = TextEditingController();
-
-  // void saveTitleInput(String inputValue) {
-  //   enteredTitle = inputValue;
-  // }
-  void saveInputs(String inputTitle, int inputAmount) {
-    enteredTitle = inputTitle;
-    enteredAmount = inputAmount;
-  }
 
   @override
   void dispose() {
@@ -28,6 +17,19 @@ class _NewExpenseState extends State<NewExpense> {
     titleController.dispose();
     amountController.dispose();
     super.dispose();
+  }
+
+  void datePicker() {
+    final now = DateTime.now();
+    final firstdate = DateTime(now.year - 1);
+    final lastDate = now;
+
+    showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: firstdate,
+      lastDate: lastDate,
+    );
   }
 
   @override
@@ -51,22 +53,42 @@ class _NewExpenseState extends State<NewExpense> {
               ),
             ),
           ),
-          TextField(
-            controller: amountController,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              label: Text('Amount'),
-              prefixText: '\$ ',
-              labelStyle: TextStyle(
-                color: Colors.redAccent,
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: amountController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    label: Text('Amount'),
+                    prefixText: '\$ ',
+                    labelStyle: TextStyle(
+                      color: Colors.redAccent,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                  ),
+                ),
               ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+
+              //date
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text('Selected Date'),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: datePicker,
+                      icon: const Icon(Icons.calendar_month),
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
           Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ElevatedButton(
                 onPressed: () {
