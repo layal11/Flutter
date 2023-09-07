@@ -1,4 +1,6 @@
+import 'package:first_flutter_app/models/expense.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key});
@@ -10,6 +12,24 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
+  DateTime? selectedDate;
+  Categories selectedCategory = Categories.food;
+
+  void datePicker() async {
+    final now = DateTime.now();
+    final firstdate = DateTime(now.year - 1);
+    final lastDate = now;
+
+    var pickedDate = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: firstdate,
+      lastDate: lastDate,
+    );
+    setState(() {
+      selectedDate = pickedDate;
+    });
+  }
 
   @override
   void dispose() {
@@ -17,19 +37,6 @@ class _NewExpenseState extends State<NewExpense> {
     titleController.dispose();
     amountController.dispose();
     super.dispose();
-  }
-
-  void datePicker() {
-    final now = DateTime.now();
-    final firstdate = DateTime(now.year - 1);
-    final lastDate = now;
-
-    showDatePicker(
-      context: context,
-      initialDate: now,
-      firstDate: firstdate,
-      lastDate: lastDate,
-    );
   }
 
   @override
@@ -77,9 +84,18 @@ class _NewExpenseState extends State<NewExpense> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text('Selected Date'),
-                    const Spacer(),
+                    Text(
+                      selectedDate == null
+                          ? 'Select a date'
+                          : DateFormat.yMd().format(
+                              selectedDate!), // selectedDate! to tell flutter that this can't be null
+                    ),
+                    const SizedBox(width: 30),
                     IconButton(
+                      //to remove IconButton padding
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+
                       onPressed: datePicker,
                       icon: const Icon(Icons.calendar_month),
                     ),
@@ -88,19 +104,45 @@ class _NewExpenseState extends State<NewExpense> {
               ),
             ],
           ),
+          const SizedBox(height: 20),
           Row(
             children: [
+              DropdownButton(
+                value: selectedCategory,
+                items: Categories.values
+                    .map(
+                      (category) => DropdownMenuItem(
+                        value: category,
+                        child: Text(
+                          category.name.toUpperCase(),
+                        ),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    if (value == null) {
+                      return;
+                    }
+                    selectedCategory = value;
+                  });
+                  print(value);
+                },
+              ),
+              const Spacer(),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Close'),
+              ),
+
+              // const Spacer(),
+
               ElevatedButton(
                 onPressed: () {
                   print(titleController.text);
                   print(amountController.text);
                 },
                 child: const Text('Save Expense'),
-              ),
-              const Spacer(),
-              ElevatedButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Close'),
               ),
             ],
           )
