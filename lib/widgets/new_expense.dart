@@ -45,7 +45,7 @@ class _NewExpenseState extends State<NewExpense> {
         context: context,
         builder: (ctx) => AlertDialog(
           title: const Text('Invalid Input!'),
-          content: const Text('Please make sure to insert all data.'),
+          content: const Text('Please make sure to insert all data correctly.'),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
@@ -77,7 +77,7 @@ class _NewExpenseState extends State<NewExpense> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(25),
+      padding: const EdgeInsets.fromLTRB(25, 100, 25, 25),
       child: Column(
         children: [
           TextField(
