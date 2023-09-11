@@ -14,8 +14,16 @@ class ExpenseItem extends StatelessWidget {
           vertical: 20,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(expenseItem.title),
+            Text(
+              expenseItem.title,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontWeight: FontWeight.normal),
+              //overriding Theme.of(context) by adding .copyWith(...)
+            ),
             const SizedBox(height: 10),
             Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
