@@ -98,6 +98,7 @@ Widget x = const WidgetName();
 # Expanded widget
 - Creates a widget that expands a child of a [Row], [Column], or [Flex] so that the child fills the available space along the flex widget's main axis.
 In other words, child inside Row/Column/Flex won't take space more than their parent widget.
+Expanded constraints the child to only take as much space as available in the Row/Column after sizing the other child.
 
 # get  Method
 - we can write:
@@ -133,6 +134,9 @@ Continue F5 => goes to the next breakpoint
 - used in StatefulWidget ONLY
 - dispose, like initState and build, is part of a StatefulWidget's life cycle. it is called automatically by flutter when the widget and its state are about to be destroyed (removed from the UI)
 
-# dynamically checking if we are in dark mode using MediaQuery
-- final isDarkMode =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
+# MediaQuery
+- dynamically checking if we are in dark mode
+    ex:  final isDarkMode =
+            MediaQuery.of(context).platformBrightness == Brightness.dark;
+            
+- MediaQuery.of(context).size.
