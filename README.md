@@ -134,14 +134,20 @@ Continue F5 => goes to the next breakpoint
 - used in StatefulWidget ONLY
 - dispose, like initState and build, is part of a StatefulWidget's life cycle. it is called automatically by flutter when the widget and its state are about to be destroyed (removed from the UI)
 
-# MediaQuery
+# MediaQuery & overlappping
 - dynamically checking if we are in dark mode
     ex:  final isDarkMode =
             MediaQuery.of(context).platformBrightness == Brightness.dark;
             
 - check the width of the screen
     final screenWidth = MediaQuery.of(context).size.width or .height
+
 - prevent overlappping (keyboard)
     final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
     then wrap the widget with SingleChildScrollView
     then wrap with SizedBox and height:double.infinity,
+#### useSafeArea (prevent overlapping over the system bar of the phone like: wifi, battery icon, camera...)
+- showModalBottomSheet(
+      useSafeArea: true,
+    )
+
