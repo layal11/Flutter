@@ -1,3 +1,4 @@
+import 'package:first_flutter_app/widgets/charts/chart.dart';
 import 'package:first_flutter_app/widgets/expenses_list/expenses_list.dart';
 import 'package:first_flutter_app/models/expense.dart';
 import 'package:first_flutter_app/widgets/new_expense.dart';
@@ -15,14 +16,24 @@ class _ExpensesState extends State<Expenses> {
   final List<Expense> _registeredExpenses = [
     Expense.named(
         title: 'Fast food',
-        amount: 10.5,
+        amount: 150,
         date: DateTime.now(),
         category: Categories.food),
     Expense.named(
         title: 'Flutter course',
-        amount: 20,
+        amount: 80,
         date: DateTime.now(),
         category: Categories.work),
+    Expense.named(
+        title: 'Europe tourism',
+        amount: 1000,
+        date: DateTime.now(),
+        category: Categories.travel),
+    Expense.named(
+        title: 'Movies subscription',
+        amount: 100,
+        date: DateTime.now(),
+        category: Categories.leisure),
   ];
 
   void addExpense(Expense expense) {
@@ -87,7 +98,7 @@ class _ExpensesState extends State<Expenses> {
       ),
       body: Column(
         children: [
-          const Text('The Chart...'),
+          Chart(expenses: _registeredExpenses),
           Expanded(
             child: mainContent,
           ),

@@ -132,3 +132,7 @@ Continue F5 => goes to the next breakpoint
 # Dispose method
 - used in StatefulWidget ONLY
 - dispose, like initState and build, is part of a StatefulWidget's life cycle. it is called automatically by flutter when the widget and its state are about to be destroyed (removed from the UI)
+
+# dynamically checking if we are in dark mode using MediaQuery
+- final isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
