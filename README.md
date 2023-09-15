@@ -139,4 +139,9 @@ Continue F5 => goes to the next breakpoint
     ex:  final isDarkMode =
             MediaQuery.of(context).platformBrightness == Brightness.dark;
             
-- MediaQuery.of(context).size.
+- check the width of the screen
+    final screenWidth = MediaQuery.of(context).size.width or .height
+- prevent overlappping (keyboard)
+    final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
+    then wrap the widget with SingleChildScrollView
+    then wrap with SizedBox and height:double.infinity,

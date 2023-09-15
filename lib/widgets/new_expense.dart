@@ -76,112 +76,118 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(25, 100, 25, 25),
-      child: Column(
-        children: [
-          TextField(
-            controller: titleController,
-            maxLength: 50,
-            keyboardType: TextInputType
-                .text, //show optimized keyboard (number, email) - we don't need it here .text is the default
-            decoration: const InputDecoration(
-              label: Text('Title'),
-              labelStyle: TextStyle(
-                color: Colors.redAccent,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
-            ),
-          ),
-          Row(
+    final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
+    return SizedBox(
+      height: double.infinity,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(25, 50, 25, keyboardSpace + 25),
+          child: Column(
             children: [
-              Expanded(
-                child: TextField(
-                  controller: amountController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    label: Text('Amount'),
-                    prefixText: '\$ ',
-                    labelStyle: TextStyle(
-                      color: Colors.redAccent,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
+              TextField(
+                controller: titleController,
+                maxLength: 50,
+                keyboardType: TextInputType
+                    .text, //show optimized keyboard (number, email) - we don't need it here .text is the default
+                decoration: const InputDecoration(
+                  label: Text('Title'),
+                  labelStyle: TextStyle(
+                    color: Colors.redAccent,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                 ),
               ),
-
-              //date
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      selectedDate == null
-                          ? 'Select a date'
-                          : DateFormat.yMd().format(
-                              selectedDate!), // selectedDate! to tell flutter that this can't be null
-                    ),
-                    const SizedBox(width: 30),
-                    IconButton(
-                      //to remove IconButton padding
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-
-                      onPressed: datePicker,
-                      icon: const Icon(Icons.calendar_month),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Row(
-            children: [
-              DropdownButton(
-                value: selectedCategory,
-                items: Categories.values
-                    .map(
-                      (category) => DropdownMenuItem(
-                        value: category,
-                        child: Text(
-                          category.name.toUpperCase(),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: amountController,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        label: Text('Amount'),
+                        prefixText: '\$ ',
+                        labelStyle: TextStyle(
+                          color: Colors.redAccent,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                       ),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    if (value == null) {
-                      return;
-                    }
-                    selectedCategory = value;
-                  });
-                  print(value);
-                },
+                    ),
+                  ),
+    
+                  //date
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          selectedDate == null
+                              ? 'Select a date'
+                              : DateFormat.yMd().format(
+                                  selectedDate!), // selectedDate! to tell flutter that this can't be null
+                        ),
+                        const SizedBox(width: 30),
+                        IconButton(
+                          //to remove IconButton padding
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+    
+                          onPressed: datePicker,
+                          icon: const Icon(Icons.calendar_month),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              const Spacer(),
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Close'),
-              ),
-
-              const Spacer(),
-              // const Padding(padding: EdgeInsets.only(right: 10)),
-
-              ElevatedButton(
-                onPressed: () {
-                  saveExpenseData();
-                },
-                child: const Text('Save Expense'),
-              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  DropdownButton(
+                    value: selectedCategory,
+                    items: Categories.values
+                        .map(
+                          (category) => DropdownMenuItem(
+                            value: category,
+                            child: Text(
+                              category.name.toUpperCase(),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        if (value == null) {
+                          return;
+                        }
+                        selectedCategory = value;
+                      });
+                      print(value);
+                    },
+                  ),
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Close'),
+                  ),
+    
+                  const Spacer(),
+                  // const Padding(padding: EdgeInsets.only(right: 10)),
+    
+                  ElevatedButton(
+                    onPressed: () {
+                      saveExpenseData();
+                    },
+                    child: const Text('Save Expense'),
+                  ),
+                ],
+              )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }
