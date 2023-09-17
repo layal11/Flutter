@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:first_flutter_app/models/expense.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -33,14 +35,24 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
-  void saveExpenseData() {
-    final titleIsInvalid = titleController.text.trim().isEmpty;
-    final amountEntered = double.tryParse(amountController.text);
-    final amountIsInvalid = amountEntered == null || amountEntered <= 0;
-    final dateIsInvalid = selectedDate == null;
-
-    if (titleIsInvalid || amountIsInvalid || dateIsInvalid) {
-      //show error message
+  void _showDialog() {
+    //show error message on IOS
+    if (Platform.isIOS) {
+      showCupertinoDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Invalid Input!'),
+          content: const Text('Please make sure to insert all data correctly.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Okay'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      //show error message on other devices
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
@@ -54,6 +66,17 @@ class _NewExpenseState extends State<NewExpense> {
           ],
         ),
       );
+    }
+  }
+
+  void saveExpenseData() {
+    final titleIsInvalid = titleController.text.trim().isEmpty;
+    final amountEntered = double.tryParse(amountController.text);
+    final amountIsInvalid = amountEntered == null || amountEntered <= 0;
+    final dateIsInvalid = selectedDate == null;
+
+    if (titleIsInvalid || amountIsInvalid || dateIsInvalid) {
+      _showDialog();
       return;
     }
     widget.onAddExpense(
@@ -79,7 +102,7 @@ class _NewExpenseState extends State<NewExpense> {
     final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
 
     return LayoutBuilder(builder: (ctx, constraints) {
-      print(constraints.maxWidth);
+      print('maxWidth: $constraints.maxWidth');
       final width = constraints.maxWidth;
       return SizedBox(
         height: double.infinity,
