@@ -134,7 +134,7 @@ Continue F5 => goes to the next breakpoint
 - used in StatefulWidget ONLY
 - dispose, like initState and build, is part of a StatefulWidget's life cycle. it is called automatically by flutter when the widget and its state are about to be destroyed (removed from the UI)
 
-# MediaQuery & overlappping
+# MediaQuery responsiveness & overlappping
 - dynamically checking if we are in dark mode
     ex:  final isDarkMode =
             MediaQuery.of(context).platformBrightness == Brightness.dark;
@@ -151,3 +151,7 @@ Continue F5 => goes to the next breakpoint
       useSafeArea: true,
     )
 
+# LayoutBuilder widget is alternative to MediaQuery responsiveness
+- LayoutBuilder(
+    builder: (ctx, constraints) => Widget(),
+    );

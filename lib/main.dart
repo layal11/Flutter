@@ -14,8 +14,8 @@ var kDarkThemeScheme = ColorScheme.fromSeed(
 void main() {
   //WidgetsFlutterBinding used to lock the orientation
   //and make the app run as needed in SystemChrome
-  // WidgetsFlutterBinding.ensureInitialized();
 
+  // WidgetsFlutterBinding.ensureInitialized();
   // SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.portraitUp,
   // ]).then((value) =>
