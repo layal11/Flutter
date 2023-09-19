@@ -11,7 +11,12 @@ class CategoryGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      color: category.color,
+      decoration: BoxDecoration(
+        color: category.color,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ),
+      ),
       child: Text(
         category.title,
         style: Theme.of(context)
