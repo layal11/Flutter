@@ -16,11 +16,23 @@ class MealsScreen extends StatelessWidget {
     );
 
     if (meals.isEmpty) {
-      body = const Center(
+      body = Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Uh oh... Nothing here!'),
-            Text('Try selecting another category!'),
+            Text(
+              'Uh oh... Nothing here!',
+              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'Try selecting another category!',
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
           ],
         ),
       );
