@@ -82,6 +82,7 @@ Widget x = const WidgetName();
         return summary;
     }
 2. enum
+    - to access it's values use categories.name or categories.name[i]
     - enum Categories
         {
             leisure,
@@ -129,6 +130,7 @@ Continue F5 => goes to the next breakpoint
 # packages
     - uuid for unique id generation 
     - intl for date/number formatting
+    - transparent_image for fadeInImage
 
 # Dispose method
 - used in StatefulWidget ONLY
