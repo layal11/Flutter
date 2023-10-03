@@ -9,6 +9,7 @@ class MealsScreen extends StatelessWidget {
   final List<Meal> meals;
 
   void selectMeal(BuildContext context, Meal meal) {
+    // final firstMeal = dummyMeals.where((meal) => meal.id).first;
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) => MealDetailsScreen(meal: meal),
