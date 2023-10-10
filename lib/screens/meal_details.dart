@@ -14,7 +14,14 @@ class MealDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
-        actions: const [],
+        actions: [
+          IconButton(
+            onPressed: () => onToggleFavoriteMeal(meal),
+            icon: const Icon(
+              Icons.star,
+            ),
+          ),
+        ],
       ),
       body: ListView(
         children: [
