@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MealDetailsScreen extends StatelessWidget {
-  const MealDetailsScreen({super.key, required this.meal});
+  const MealDetailsScreen(
+      {super.key, required this.meal, required this.onToggleFavoriteMeal});
 
   final Meal meal;
+  final void Function(Meal meal) onToggleFavoriteMeal;
 
   @override
   Widget build(BuildContext context) {
