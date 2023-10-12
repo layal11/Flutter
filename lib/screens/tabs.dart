@@ -15,6 +15,12 @@ class _ScreensState extends State<TabsScreen> {
   int selectedPageIndex = 0;
   final List<Meal> favoriteMeals = [];
 
+  void selectDrawer(String indntfr) {
+    if (indntfr == 'meals') {
+      Navigator.of(context).pop();
+    } else {}
+  }
+
   void showInfoMessage(String message) {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
@@ -65,7 +71,7 @@ class _ScreensState extends State<TabsScreen> {
       appBar: AppBar(
         title: Text(activePageTitle),
       ),
-      drawer: const MainDarwer(),
+      drawer: MainDarwer(onSelectDrawer: selectDrawer),
       body: activeScreen,
       bottomNavigationBar: BottomNavigationBar(
         onTap: selectPage,
