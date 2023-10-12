@@ -11,6 +11,9 @@ class FiltersScreen extends StatefulWidget {
 
 class _FiltersState extends State<FiltersScreen> {
   bool toggleGlutenFree = false;
+  bool toggleIsVegan = false;
+  bool toggleIsVegetarian = false;
+  bool toggleIsLactoseFree = false;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +55,63 @@ class _FiltersState extends State<FiltersScreen> {
                   ),
             ),
           ),
+          SwitchListTile(
+            value: toggleIsVegan,
+            onChanged: (value) => setState(() {
+              toggleIsVegan = value;
+            }),
+            activeColor: Theme.of(context).colorScheme.tertiary,
+            contentPadding: const EdgeInsets.only(left: 17, right: 17),
+            title: Text(
+              'Vegan',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            subtitle: Text(
+              'Only includes vegan meals.',
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+          ),
+
+          SwitchListTile(
+            value: toggleIsVegetarian,
+            onChanged: (value) => setState(() {
+              toggleIsVegetarian = value;
+            }),
+            title:  Text(
+              'Vegetarian',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            subtitle:  Text(
+              'Only includes vegetarian meals.',
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+          ),
+           SwitchListTile(
+            value: toggleIsLactoseFree,
+            onChanged: (value) => setState(() {
+              toggleIsLactoseFree = value;
+            }),
+            title:  Text(
+              'Lactose-free',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            subtitle:  Text(
+              'Only includes Lactose-free meals.',
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+          )
         ],
       ),
     );
