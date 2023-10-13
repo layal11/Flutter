@@ -1,5 +1,5 @@
-import 'package:first_flutter_app/screens/tabs.dart';
-import 'package:first_flutter_app/widgets/main_darwer.dart';
+// import 'package:first_flutter_app/screens/tabs.dart';
+// import 'package:first_flutter_app/widgets/main_darwer.dart';
 import 'package:flutter/material.dart';
 
 class FiltersScreen extends StatefulWidget {
@@ -21,18 +21,18 @@ class _FiltersState extends State<FiltersScreen> {
       appBar: AppBar(
         title: const Text('Your Filters'),
       ),
-      drawer: MainDarwer(
-        onSelectDrawer: (identifier) {
-          Navigator.of(context).pop();
-          if (identifier == 'meals') {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => const TabsScreen(),
-              ),
-            );
-          }
-        },
-      ),
+      // drawer: MainDarwer(
+      //   onSelectDrawer: (identifier) {
+      //     Navigator.of(context).pop();
+      //     if (identifier == 'meals') {
+      //       Navigator.of(context).pushReplacement(
+      //         MaterialPageRoute(
+      //           builder: (context) => const TabsScreen(),
+      //         ),
+      //       );
+      //     }
+      //   },
+      // ),
       body: Column(
         children: [
           SwitchListTile(
@@ -75,37 +75,38 @@ class _FiltersState extends State<FiltersScreen> {
                   ),
             ),
           ),
-
           SwitchListTile(
             value: toggleIsVegetarian,
             onChanged: (value) => setState(() {
               toggleIsVegetarian = value;
             }),
-            title:  Text(
+            activeColor: Theme.of(context).colorScheme.tertiary,
+            contentPadding: const EdgeInsets.only(left: 17, right: 17),
+            title: Text(
               'Vegetarian',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
             ),
-            subtitle:  Text(
+            subtitle: Text(
               'Only includes vegetarian meals.',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
             ),
           ),
-           SwitchListTile(
+          SwitchListTile(
             value: toggleIsLactoseFree,
             onChanged: (value) => setState(() {
               toggleIsLactoseFree = value;
             }),
-            title:  Text(
+            title: Text(
               'Lactose-free',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
             ),
-            subtitle:  Text(
+            subtitle: Text(
               'Only includes Lactose-free meals.',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
