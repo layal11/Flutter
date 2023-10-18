@@ -68,7 +68,8 @@ Widget x = const WidgetName();
 - used to change the order of the items in the list. However, it changes the order of items in the original list object stored in memory and that's why we need to copy the original one before shuffling using List.of()
 
 # Data Types
-1. List<>
+1. List<
+    - Map<specifyKeyType, specifyKeyValue> 
     - List<Map<String, Object>> getSummaryData() {
         final List<Map<String, Object>> summary = []; //course 81
         for (var i = 0; i <= chosenAnswers.length; i++) {
