@@ -16,18 +16,32 @@ class _ScreensState extends State<TabsScreen> {
   int selectedPageIndex = 0;
   final List<Meal> favoriteMeals = [];
 
-  void selectDrawer(String idntfr) {
+  void selectDrawer(String idntfr) async {
     if (idntfr == 'meals') {
       Navigator.of(context).pop();
     } else {
       Navigator.of(context).pop();
-      Navigator.of(context).push(
+      final result = await Navigator.of(context).push<Map<Filter, bool>>(
         MaterialPageRoute(
           builder: (context) => const FiltersScreen(),
         ),
       );
+      print(result);
     }
   }
+
+  // //SECOND WAY
+  // void selectDrawer(String idntfr) async {
+  //   Navigator.of(context).pop();
+  //   if (idntfr == 'filters') {
+  //     final result = await Navigator.of(context).push<Map<Filter, bool>>(
+  //       MaterialPageRoute(
+  //         builder: (ctx) => const FiltersScreen(),
+  //       ),
+  //     );
+  //     print(result);
+  //   }
+  // }
 
   void showInfoMessage(String message) {
     ScaffoldMessenger.of(context).clearSnackBars();

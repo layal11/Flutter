@@ -43,6 +43,7 @@ class _FiltersState extends State<FiltersScreen> {
       body: WillPopScope(
         onWillPop: () async {
           Navigator.of(context).pop({
+            // key: value,
             Filter.glutenFree: toggleGlutenFree,
             Filter.lactoseFree: toggleIsLactoseFree,
             Filter.vegan: toggleIsVegan,
