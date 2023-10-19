@@ -10,7 +10,9 @@ enum Filter {
 }
 
 class FiltersScreen extends StatefulWidget {
-  const FiltersScreen({super.key});
+  const FiltersScreen({super.key, required this.currentFilters});
+
+  final Map<Filter, bool> currentFilters;
 
   @override
   State<FiltersScreen> createState() => _FiltersState();
@@ -21,6 +23,18 @@ class _FiltersState extends State<FiltersScreen> {
   bool toggleIsVegan = false;
   bool toggleIsVegetarian = false;
   bool toggleIsLactoseFree = false;
+
+  @override
+  void initState() {
+    //initState runs before the build method executes
+    super.initState();
+    //access the property of a StatefulWidget using widget.propertyName
+    //this value cannot be null
+    toggleGlutenFree = widget.currentFilters[Filter.glutenFree]!;
+    toggleIsVegan = widget.currentFilters[Filter.vegan]!;
+    toggleIsVegetarian = widget.currentFilters[Filter.vegetarian]!;
+    toggleIsLactoseFree = widget.currentFilters[Filter.lactoseFree]!;
+  }
 
   @override
   Widget build(BuildContext context) {

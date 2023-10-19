@@ -5,6 +5,14 @@ import 'package:first_flutter_app/screens/meals.dart';
 import 'package:first_flutter_app/widgets/main_darwer.dart';
 import 'package:flutter/material.dart';
 
+//global variable/constant
+const kDefaultFilters = {
+  Filter.glutenFree: false,
+  Filter.lactoseFree: false,
+  Filter.vegan: false,
+  Filter.vegetarian: false,
+};
+
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
 
@@ -15,6 +23,7 @@ class TabsScreen extends StatefulWidget {
 class _ScreensState extends State<TabsScreen> {
   int selectedPageIndex = 0;
   final List<Meal> favoriteMeals = [];
+  Map<Filter, bool> selectedFilters = kDefaultFilters;
 
   void selectDrawer(String idntfr) async {
     if (idntfr == 'meals') {
@@ -23,9 +32,15 @@ class _ScreensState extends State<TabsScreen> {
       Navigator.of(context).pop();
       final result = await Navigator.of(context).push<Map<Filter, bool>>(
         MaterialPageRoute(
-          builder: (context) => const FiltersScreen(),
+          builder: (context) => FiltersScreen(
+            currentFilters: selectedFilters,
+          ),
         ),
       );
+      setState(() {
+        //?? means "if null"
+        selectedFilters = result ?? kDefaultFilters;
+      });
       print(result);
     }
   }
