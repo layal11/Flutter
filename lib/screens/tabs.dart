@@ -1,3 +1,4 @@
+import 'package:first_flutter_app/data/dummy_data.dart';
 import 'package:first_flutter_app/models/meal.dart';
 import 'package:first_flutter_app/screens/categories.dart';
 import 'package:first_flutter_app/screens/filters.dart';
@@ -91,8 +92,24 @@ class _ScreensState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final avlblFilteredMeals = dummyMeals.where((meal) {
+      if (selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
+        return false;
+      }
+      if (selectedFilters[Filter.lactoseFree]! && !meal.isLactoseFree) {
+        return false;
+      }
+      if (selectedFilters[Filter.vegan]! && !meal.isVegan) {
+        return false;
+      }
+      if (selectedFilters[Filter.vegetarian]! && !meal.isVegetarian) {
+        return false;
+      }
+      return true;
+    }).toList();
     Widget activeScreen = CategoriesScreen(
       onToggleFavoriteMeal: toggleFavoriteMeal,
+      availableMeals: avlblFilteredMeals,
     );
     var activePageTitle = 'Categories';
 
