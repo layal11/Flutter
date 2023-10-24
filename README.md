@@ -132,6 +132,7 @@ Continue F5 => goes to the next breakpoint
     - uuid for unique id generation 
     - intl for date/number formatting
     - transparent_image for fadeInImage
+    - riverpod for state management
 
 # Dispose method
 - used in StatefulWidget ONLY
