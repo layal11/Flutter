@@ -159,3 +159,21 @@ Continue F5 => goes to the next breakpoint
 - LayoutBuilder(
     builder: (ctx, constraints) => Widget(),
     );
+
+# Providers (StateNotifier)
+### NOTE: in StateNotifier we are not allowed to edit an existing value (.add or .remove) in memory, instead we must always replace (by using 'state' property) or create a new one
+
+## StatelessWidget
+    - change StatelessWidget to => ConsumerWidget
+    - add WidgetRef in the build parameters to listen to the provider
+        Widget build(BuildContext context, WidgetRef ref) {
+            return Column();
+        } 
+
+## StatefullWidget
+    - change StatefullWidget to => ConsumerStatefulWidget
+    - in the second class change State to => ConsumerState
+        class _ScreensState extends ConsumerState<TabsScreen> {
+        return Column();
+        }
+    - NOTE: in StatefullWidget No Need to declare WidgetRef in the build    method because ConsumerState maked it globally available

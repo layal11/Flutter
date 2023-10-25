@@ -1,4 +1,4 @@
-import 'package:first_flutter_app/models/meal.dart';
+import 'package:first_flutter_app/providers/favorites_provider.dart';
 import 'package:first_flutter_app/providers/meals_provider.dart';
 import 'package:first_flutter_app/screens/categories.dart';
 import 'package:first_flutter_app/screens/filters.dart';
@@ -24,7 +24,6 @@ class TabsScreen extends ConsumerStatefulWidget {
 
 class _ScreensState extends ConsumerState<TabsScreen> {
   int selectedPageIndex = 0;
-  final List<Meal> favoriteMeals = [];
   Map<Filter, bool> selectedFilters = kDefaultFilters;
 
   void selectDrawer(String idntfr) async {
@@ -60,31 +59,6 @@ class _ScreensState extends ConsumerState<TabsScreen> {
   //   }
   // }
 
-  void showInfoMessage(String message) {
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        duration: const Duration(seconds: 3),
-      ),
-    );
-  }
-
-  void toggleFavoriteMeal(Meal meal) {
-    final isExisting = favoriteMeals.contains(meal);
-    if (isExisting) {
-      setState(() {
-        favoriteMeals.remove(meal);
-      });
-      showInfoMessage('Meal is no longer a favorite.');
-    } else {
-      setState(() {
-        favoriteMeals.add(meal);
-      });
-      showInfoMessage('Meal added to favorites!');
-    }
-  }
-
   void selectPage(int index) {
     setState(() {
       selectedPageIndex = index;
@@ -96,32 +70,26 @@ class _ScreensState extends ConsumerState<TabsScreen> {
     // similar to widget property
     // ref allows us to setup listeners to our providers
     final meals = ref.watch(mealsProvider);
-    
+
     final avlblFilteredMeals = meals.where((meal) {
-      if (selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
-        return false;
-      }
-      if (selectedFilters[Filter.lactoseFree]! && !meal.isLactoseFree) {
-        return false;
-      }
-      if (selectedFilters[Filter.vegan]! && !meal.isVegan) {
-        return false;
-      }
-      if (selectedFilters[Filter.vegetarian]! && !meal.isVegetarian) {
+      if ((selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree) ||
+          (selectedFilters[Filter.lactoseFree]! && !meal.isLactoseFree) ||
+          (selectedFilters[Filter.vegan]! && !meal.isVegan) ||
+          (selectedFilters[Filter.vegetarian]! && !meal.isVegetarian)) {
         return false;
       }
       return true;
     }).toList();
+
     Widget activeScreen = CategoriesScreen(
-      onToggleFavoriteMeal: toggleFavoriteMeal,
       availableMeals: avlblFilteredMeals,
     );
     var activePageTitle = 'Categories';
 
     if (selectedPageIndex == 1) {
+      final favoriteMeals = ref.watch(favMealsProvider);
       activeScreen = MealsScreen(
         meals: favoriteMeals,
-        onToggleFavoriteMeal: toggleFavoriteMeal,
       );
       activePageTitle = 'Favorites';
     }
