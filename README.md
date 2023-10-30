@@ -171,8 +171,8 @@ Continue F5 => goes to the next breakpoint
         } 
 
 ## trigger Provider in StatefullWidget
-    - change StatefullWidget to => ConsumerStatefulWidget
-    - in the second class change State to => ConsumerState
+    - change 'StatefullWidget' to => ConsumerStatefulWidget
+    - in the second class change 'State' to => ConsumerState
         class _ScreensState extends ConsumerState<TabsScreen> {
         return Column();
         }

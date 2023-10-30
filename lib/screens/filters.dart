@@ -1,24 +1,17 @@
 // import 'package:first_flutter_app/screens/tabs.dart';
 // import 'package:first_flutter_app/widgets/main_darwer.dart';
+import 'package:first_flutter_app/providers/filters_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-enum Filter {
-  glutenFree,
-  lactoseFree,
-  vegan,
-  vegetarian,
-}
-
-class FiltersScreen extends StatefulWidget {
-  const FiltersScreen({super.key, required this.currentFilters});
-
-  final Map<Filter, bool> currentFilters;
+class FiltersScreen extends ConsumerStatefulWidget {
+  const FiltersScreen({super.key});
 
   @override
-  State<FiltersScreen> createState() => _FiltersState();
+  ConsumerState<FiltersScreen> createState() => _FiltersState();
 }
 
-class _FiltersState extends State<FiltersScreen> {
+class _FiltersState extends ConsumerState<FiltersScreen> {
   bool toggleGlutenFree = false;
   bool toggleIsVegan = false;
   bool toggleIsVegetarian = false;
@@ -28,12 +21,13 @@ class _FiltersState extends State<FiltersScreen> {
   void initState() {
     //initState runs before the build method executes
     super.initState();
-    //access the property of a StatefulWidget using widget.propertyName
-    //this value cannot be null
-    toggleGlutenFree = widget.currentFilters[Filter.glutenFree]!;
-    toggleIsVegan = widget.currentFilters[Filter.vegan]!;
-    toggleIsVegetarian = widget.currentFilters[Filter.vegetarian]!;
-    toggleIsLactoseFree = widget.currentFilters[Filter.lactoseFree]!;
+
+    final providerFilterData = ref.read(fltrsProvider);
+
+    toggleGlutenFree = providerFilterData[Filter.glutenFree]!;
+    toggleIsVegan = providerFilterData[Filter.vegan]!;
+    toggleIsVegetarian = providerFilterData[Filter.vegetarian]!;
+    toggleIsLactoseFree = providerFilterData[Filter.lactoseFree]!;
   }
 
   @override
@@ -56,14 +50,13 @@ class _FiltersState extends State<FiltersScreen> {
       // ),
       body: WillPopScope(
         onWillPop: () async {
-          Navigator.of(context).pop({
-            // key: value,
+          ref.read(fltrsProvider.notifier).setFilters({
             Filter.glutenFree: toggleGlutenFree,
             Filter.lactoseFree: toggleIsLactoseFree,
             Filter.vegan: toggleIsVegan,
             Filter.vegetarian: toggleIsVegetarian,
           });
-          return false;
+          return true; //true to allow flutter to pop/close
         },
         child: Column(
           children: [
