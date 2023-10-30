@@ -134,6 +134,8 @@ Continue F5 => goes to the next breakpoint
     - transparent_image for fadeInImage
     - riverpod for state management
 
+    - riverpod alternatives: Redux or Bloc (https://docs.flutter.dev/data-and-backend/state-mgmt/options)
+
 # Dispose method
 - used in StatefulWidget ONLY
 - dispose, like initState and build, is part of a StatefulWidget's life cycle. it is called automatically by flutter when the widget and its state are about to be destroyed (removed from the UI)
@@ -163,8 +165,6 @@ Continue F5 => goes to the next breakpoint
 # Providers (StateNotifier)
 ### NOTE: in StateNotifier we are not allowed to edit an existing value (.add or .remove) in memory, instead we must always replace (by using 'state' property) or create a new one
 
-- ref allows us to setup listeners to our providers
-
 ## trigger Provider in StatelessWidget
     - change StatelessWidget to => ConsumerWidget
     - add WidgetRef in the build parameters to listen to the provider
@@ -179,3 +179,16 @@ Continue F5 => goes to the next breakpoint
         return Column();
         }
     - NOTE: in StatefullWidget No Need to declare WidgetRef in the build    method because ConsumerState maked it globally available
+
+## riverpod
+- wrap the main with ProviderScope
+    void main() {
+        runApp(
+            const ProviderScope(
+            child: App(),
+            ),
+        );
+    }
+- ref allows us to setup listeners to our providers 
+- use .notifier to access function from the provider
+    ex: ref.read(nameOfProvider.notifier).functionName();
