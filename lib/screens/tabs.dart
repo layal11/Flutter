@@ -1,6 +1,5 @@
 import 'package:first_flutter_app/providers/favorites_provider.dart';
 import 'package:first_flutter_app/providers/filters_provider.dart';
-import 'package:first_flutter_app/providers/meals_provider.dart';
 import 'package:first_flutter_app/screens/categories.dart';
 import 'package:first_flutter_app/screens/filters.dart';
 import 'package:first_flutter_app/screens/meals.dart';
@@ -52,20 +51,7 @@ class _ScreensState extends ConsumerState<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // similar to widget property
-    // ref allows us to setup listeners to our providers
-    final meals = ref.watch(mealsProvider);
-    final fltrProviderData = ref.watch(fltrsProvider);
-
-    final avlblFilteredMeals = meals.where((meal) {
-      if ((fltrProviderData[Filter.glutenFree]! && !meal.isGlutenFree) ||
-          (fltrProviderData[Filter.lactoseFree]! && !meal.isLactoseFree) ||
-          (fltrProviderData[Filter.vegan]! && !meal.isVegan) ||
-          (fltrProviderData[Filter.vegetarian]! && !meal.isVegetarian)) {
-        return false;
-      }
-      return true;
-    }).toList();
+    final avlblFilteredMeals = ref.watch(filteredMealsProvider);
 
     Widget activeScreen = CategoriesScreen(
       availableMeals: avlblFilteredMeals,

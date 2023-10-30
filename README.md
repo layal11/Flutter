@@ -163,6 +163,8 @@ Continue F5 => goes to the next breakpoint
 # Providers (StateNotifier)
 ### NOTE: in StateNotifier we are not allowed to edit an existing value (.add or .remove) in memory, instead we must always replace (by using 'state' property) or create a new one
 
+- ref allows us to setup listeners to our providers
+
 ## trigger Provider in StatelessWidget
     - change StatelessWidget to => ConsumerWidget
     - add WidgetRef in the build parameters to listen to the provider
