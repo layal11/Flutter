@@ -1,4 +1,5 @@
 import 'package:first_flutter_app/data/categories.dart';
+import 'package:first_flutter_app/models/category.dart';
 import 'package:flutter/material.dart';
 
 class NewItem extends StatefulWidget {
@@ -10,9 +11,18 @@ class NewItem extends StatefulWidget {
 
 class _NewItemState extends State<NewItem> {
   final formKey = GlobalKey<FormState>();
+  var enteredName = '';
+  int enteredQuantity = 1;
+  var selectedCategory = categories[Categories.vegetables];
 
   void saveItem() {
-    formKey.currentState!.validate();
+    if (formKey.currentState!.validate()) {
+      //save only if the form is validated
+      formKey.currentState!.save();
+      print(enteredName);
+      print(enteredQuantity);
+      print(selectedCategory);
+    }
   }
 
   void resetForm() {
@@ -36,6 +46,9 @@ class _NewItemState extends State<NewItem> {
               child: Column(
                 children: [
                   TextFormField(
+                    onSaved: (newValue) {
+                      enteredName = newValue!;
+                    },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Name cannot be empty';
@@ -62,6 +75,9 @@ class _NewItemState extends State<NewItem> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          onSaved: (newValue) {
+                            enteredQuantity = int.parse(newValue!);
+                          },
                           validator: (value) {
                             if (value == null ||
                                 value.isEmpty ||
@@ -73,7 +89,7 @@ class _NewItemState extends State<NewItem> {
                             }
                             return null;
                           },
-                          initialValue: '1',
+                          initialValue: enteredQuantity.toString(),
                           keyboardType: TextInputType.number,
                           maxLength: 50,
                           decoration: InputDecoration(
@@ -87,7 +103,14 @@ class _NewItemState extends State<NewItem> {
                       const SizedBox(width: 10),
                       Expanded(
                         child: DropdownButtonFormField(
-                          onChanged: (value) {},
+                          value: selectedCategory, //initial value (vegetables)
+                          onChanged: (value) {
+                            setState(() {
+                              //setState to keep sync between the UI and the value that needs to be saved
+                              selectedCategory = value;
+                            });
+                          },
+                          // hint: const Text('Select category'), //dropdown label
                           padding: const EdgeInsets.only(bottom: 15),
                           items: categories.entries
                               .map(

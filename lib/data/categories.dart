@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:first_flutter_app/models/category.dart';
 
+//Note: this is a MAP or an OBJECT not a list[]
+//use categories.entries in loops or in .where condition
+
 const categories = {
   Categories.vegetables: Category(
     'Vegetables',
