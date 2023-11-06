@@ -1,5 +1,6 @@
 import 'package:first_flutter_app/data/categories.dart';
 import 'package:first_flutter_app/models/category.dart';
+import 'package:first_flutter_app/models/grocery_item.dart';
 import 'package:flutter/material.dart';
 
 class NewItem extends StatefulWidget {
@@ -19,9 +20,17 @@ class _NewItemState extends State<NewItem> {
     if (formKey.currentState!.validate()) {
       //save only if the form is validated
       formKey.currentState!.save();
-      print(enteredName);
-      print(enteredQuantity);
-      print(selectedCategory);
+
+      //create a GroceryItem and pass it back to the screen from
+      //which we are coming from (GroceryList)
+      Navigator.of(context).pop(
+        GroceryItem(
+          id: DateTime.now().toString(),
+          name: enteredName,
+          quantity: enteredQuantity,
+          category: selectedCategory!,
+        ),
+      );
     }
   }
 

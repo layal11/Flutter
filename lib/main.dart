@@ -1,4 +1,4 @@
-import 'package:first_flutter_app/screens/groceries.dart';
+import 'package:first_flutter_app/screens/grocery_list.dart';
 import 'package:flutter/material.dart';
 
 void main() {

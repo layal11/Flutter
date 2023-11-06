@@ -1,17 +1,30 @@
+import 'package:first_flutter_app/models/grocery_item.dart';
 import 'package:first_flutter_app/screens/new_item.dart';
 import 'package:flutter/material.dart';
 
-import 'package:first_flutter_app/data/dummy_items.dart';
-
-class GroceryList extends StatelessWidget {
+class GroceryList extends StatefulWidget {
   const GroceryList({super.key});
 
-  void addNewItem(BuildContext context) {
-    Navigator.of(context).push(
+  @override
+  State<GroceryList> createState() => _GroceryListState();
+}
+
+class _GroceryListState extends State<GroceryList> {
+  final List<GroceryItem> groceries = [];
+
+  void addNewItem(BuildContext context) async {
+    final newItem = await Navigator.of(context).push<GroceryItem>(
       MaterialPageRoute(
         builder: (ctx) => const NewItem(),
       ),
     );
+    if (newItem == null) {
+      //null if the user wants to go back without entering any data
+      return;
+    }
+    setState(() {
+      groceries.add(newItem);
+    });
   }
 
   @override
@@ -27,19 +40,19 @@ class GroceryList extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
-        itemCount: groceryItems.length,
+        itemCount: groceries.length,
         itemBuilder: (ctx, index) => ListTile(
           leading: Container(
             width: 25,
             height: 25,
-            color: groceryItems[index].category.color,
+            color: groceries[index].category.color,
           ),
           title: Text(
-            groceryItems[index].name,
+            groceries[index].name,
             style: const TextStyle(fontSize: 18),
           ),
           trailing: Text(
-            groceryItems[index].quantity.toString(),
+            groceries[index].quantity.toString(),
             style: const TextStyle(fontSize: 15),
           ),
         ),
